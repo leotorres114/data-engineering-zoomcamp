@@ -25,6 +25,6 @@ docker run -it \
     -e POSTGRES_PASSWORD="password" \
     -e POSTGRES_DB="database_name" \
     -v /volume/to/map:/var/lib/postgresql/data \
-    -p host:port \
+    -p containerport:hostport \
     postgres:13
 ```
