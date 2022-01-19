@@ -25,8 +25,8 @@ def insert_data(conn, cur, filepath:str, table:str):
             conn.rollback()
             cur.close()
             return 1
-    print(f"Data was successfully inserted into {table} table")
-    cur.close()
+        print(f"Data was successfully inserted into {table} table")
+        cur.close()
 
 if __name__ == "__main__":
     db_param = {
