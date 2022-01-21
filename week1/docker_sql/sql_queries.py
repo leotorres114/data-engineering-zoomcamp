@@ -1,6 +1,10 @@
-#create yellow taxi data postgres table
+#drop table if it exists
+def drop_table(params):
+        return f"""DROP TABLE IF EXISTS {params.table_name};"""
 
-create_table = """CREATE TABLE IF NOT EXISTS yellow_taxi_data (
+#create table schema
+def create_table(params):
+        return f"""CREATE TABLE {params.table_name} (
         VendorID VARCHAR, 
         tpep_pickup_datetime TIMESTAMP WITHOUT TIME ZONE, 
         tpep_dropoff_datetime TIMESTAMP WITHOUT TIME ZONE, 
@@ -19,5 +23,5 @@ create_table = """CREATE TABLE IF NOT EXISTS yellow_taxi_data (
         improvement_surcharge FLOAT(53), 
         total_amount FLOAT(53), 
         congestion_surcharge FLOAT(53)
-)
+);
 """
