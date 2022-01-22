@@ -1,30 +1,32 @@
-# Week 1 Notes - Docker and Postgres
+# Week 1 Review - Data Pipelines with Docker
 
-## Docker
-### What is a container? 
-Isolated environment which can package applications, frameworks, and libraries in a standardized manner.
+## Overview
+In Week 1 of DataTalks.Club's [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp), we were introduced to creating containerized data pipelines using Docker. 
 
-### Why should data engineers care about Docker?
-- Reproducible (run pipeline locally or cloud)
-- Experiment locally
-- Integration tests (CI/CD)
-- Can run multiple environments at the same time
-- Lightweight and easy to maintain
+Here's an overview of the (fairly straightforward) workflow:
 
-### Hello World Docker Example
+![data pipepine](img/wflow.jpg)
 
-```bash
-docker run hello-world
+The lesson uses [Yellow Taxi Trip Records](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) data collected Jan-2021 from NYC's Taxi and Limousine Commission (TLC). The data is downloaded, processed, and inserted into a Postgres database via the `ingest_data.py` script running on a Python Docker container built from the repo's Dockerfile. This container talks to the Postgres database (running on a separate container) via a Docker network. Once the data is in Postgres, we can run analytical queries via pgcli. For example, to get the total number of records in the data, we can run
+
+```SQL
+SELECT COUNT(1) FROM YELLOW_TAXI_DATA;
 ```
+which will output: 
 
-### Running a Postgres 13 Docker Image
++---------+
+| count   |
+|---------|
+| 1369765 |
++---------+
 
+## Deviations from DE Zoomcamp
+While this data pipeline follows the same workflow as the DE Zoomcamp, I challenged myself to use as much vanilla Python as possible (for the sake of learning Python). So, besides the standard libraries, I only used the [psycopg2](https://www.psycopg.org) library (a Postgres adapter for Python) whereas the DE Zoomcamp used Pandas for data processing and SQL Alchemy for connecting to the database. 
+
+## Run the Pipeline
+To actually run the pipeline (on MacOS or Linux), simply run the `run_me.sh` bash script: 
 ```bash
-docker run -it \
-    -e POSTGRES_USER="user" \
-    -e POSTGRES_PASSWORD="password" \
-    -e POSTGRES_DB="database_name" \
-    -v /volume/to/map:/var/lib/postgresql/data \
-    -p containerport:hostport \
-    postgres:13
+bash run_me.sh
 ```
+The script builds the Python Docker image from the repo's Dockerfile, creates a Docker network and Docker volume to map the database to (for persistent data storage) and runs both the Postgres and Python Docker containers.
+
