@@ -4,6 +4,9 @@ docker build -t taxi_ingest:v001 .
 #create docker network to connect dockerized script to postgres database
 docker network create pg-network
 
+#create docker volume to map database to
+docker volume create db_volume
+
 #run postgres docker container
 docker run -it \
     -e POSTGRES_USER="root" \
