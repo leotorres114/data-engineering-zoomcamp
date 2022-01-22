@@ -1,3 +1,5 @@
+!#/bin/bash
+
 #build dockerized .py script from Dockerfile
 docker build -t taxi_ingest:v001 .
 
