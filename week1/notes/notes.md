@@ -1,6 +1,4 @@
-# Week 1 Review - Data Pipelines with Docker
-# Week 1 Review - 
-#dataengzoomcamp
+# Week 1 Review
 
 # Data Pipelines with Docker
 ## Docker
