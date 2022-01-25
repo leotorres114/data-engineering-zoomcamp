@@ -32,4 +32,4 @@ To actually run the pipeline (on MacOS or Linux), simply run the `run_me.sh` bas
 ```bash
 bash run_me.sh
 ```
-The script builds the Python Docker image from the repo's Dockerfile, creates a Docker network and Docker volume to map the database to (for persistent data storage) and runs both the Postgres and Python Docker containers.
+The script builds the Python Docker image from the repo's Dockerfile, creates a Docker network and Docker volume to map the database to (for persistent data storage) and runs both the Postgres and Python Docker containers. Note: *this bash script assumes that Docker is already running!*
