@@ -59,10 +59,6 @@ x-airflow-common:
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKEND: 'airflow.api.auth.backend.basic_auth'
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
-    GOOGLE_APPLICATION_CREDENTIALS: /.gc/google_credentials.json
-    AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT: 'google-cloud-platform://?extra__google_cloud_platform__key_path=/.gc/google_credentials.json'
-    GCP_PROJECT_ID: 'high-sunlight-339220'
-    GCP_GCS_BUCKET: "dtc_data_lake_high-sunlight-339220"
     PG_HOST: "${PG_HOST}"
     PG_USER: "${PG_USER}"
     PG_PASSWORD: "${PG_PASSWORD}"
@@ -73,7 +69,6 @@ x-airflow-common:
     - ./dags/:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
-    - ~/.gc/credentials/:/.gc/credentials:ro
 
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
